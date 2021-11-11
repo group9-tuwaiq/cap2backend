@@ -2,38 +2,25 @@ const express = require("express");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
 const cors = require("cors");
-
+const axios=require("axios");
 dotenv.config();
 
-// router
-const movieRouter = require("./routers/routes/moviesRoute");
 
-const app = express();
+app.get("/movies",(req,res)=>{
+  axios.get("https://itunes.apple.com/search?term=all&media=movie")
+  .then((response)=>{
+      res.status(200).json(response.data)
+  })
+})
+app.get("/songs",(req,res)=>{
+  axios.get("https://itunes.apple.com/search?term=all&media=music")
+  .then((response)=>{
+      res.status(200).json(response.data)
+  })
+})
 
-//app level middleware
-app.use(express.json());
-const appMiddleware = (req, res, next) => {
-  console.log("appMiddleware");
-  next();
-};
-app.use(appMiddleware);
-app.use(cors());
 
-app.use(morgan("dev"));
-
-// router level middleware
-const movieMiddleware = (req, res, next) => {
-  console.log("movies");
-  next();
-};
-
-//third party middleware
-
-//routers level middleware
-app.use("/movies", movieMiddleware, movieRouter);
-
-const PORT = 4000;
-// process.env.PORT || 4000;
+const PORT =  process.env.PORT || 4000;
 
 app.listen(PORT, () => {
   console.log(`Server on ${PORT}`);
