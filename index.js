@@ -25,7 +25,7 @@ app.get("/songs", (req, res) => {
       //  console.log(songs);
       res.status(200).json(response.data);
     });
-  console.log(songs);
+  
 });
 
 //// Search Function
@@ -48,11 +48,7 @@ app.get("/search", (req, res) => {
 });
 
 
-
-
-      res.status(200).json(response.data);
-    });
-});
+    
 app.get("/music", (req, res) => {
   axios
     .get("https://itunes.apple.com/search?term=all&media=music")
