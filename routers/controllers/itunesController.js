@@ -38,7 +38,7 @@ const getAllPodcast = (req, res) => {
 };
 const getAllTvshow = (req, res) => {
   axios
-    .get("https://itunes.apple.com/search?term=all&media=tvshow")
+    .get("https://itunes.apple.com/search?term=all&media=tvShow")
     .then((response) => {
       res.status(200).json(response.data);
     });
