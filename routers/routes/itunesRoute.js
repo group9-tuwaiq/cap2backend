@@ -8,6 +8,7 @@ const {
   getAllAudiobook,
   getAllSoftware,
   fav,
+  search
 } = require("../controllers/itunesController");
 
 const itunesRouetr = express.Router();
@@ -28,4 +29,5 @@ itunesRouetr.get("/software", getAllSoftware);
 
 itunesRouetr.put("/fav", fav);
 
+itunesRouetr.get("/search",search)
 module.exports = itunesRouetr;

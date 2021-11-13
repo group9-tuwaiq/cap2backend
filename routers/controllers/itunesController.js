@@ -88,6 +88,23 @@ const fav = (req, res) => {
   });
 };
 
+const search=(req,res)=>{
+  const searchVal = req.body.value;
+  const mediaType=req.body.mediaType;
+  axios
+    .get(`https://itunes.apple.com/search?term=all&media=${mediaType}`)
+    .then((response) => {
+      let result = response.data.results.filter((item) => {
+        return (
+          item.trackName.toLowerCase() == searchVal.toLowerCase() ||
+          item.artistName.toLowerCase() == searchVal.toLowerCase()
+        );
+
+        // console.log(ele);
+      });
+      res.status(200).json(result);
+    });
+}
 module.exports = {
   getAllMovies,
   getAllMusic,
@@ -97,4 +114,5 @@ module.exports = {
   getAllAudiobook,
   getAllSoftware,
   fav,
+  search
 };
