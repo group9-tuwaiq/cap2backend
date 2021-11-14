@@ -8,6 +8,10 @@ const {
   getAllAudiobook,
   getAllSoftware,
   fav,
+  getItemDetails,
+  getCurrentItem,
+  getFavoriteItem,
+  postFavoriteItems
 } = require("../controllers/itunesController");
 
 const itunesRouetr = express.Router();
@@ -26,6 +30,14 @@ itunesRouetr.get("/audiobook", getAllAudiobook);
 
 itunesRouetr.get("/software", getAllSoftware);
 
-itunesRouetr.put("/fav", fav);
+itunesRouetr.post("/fav", fav);
+
+itunesRouetr.post("/getItemDetails", getItemDetails);
+
+itunesRouetr.get("/getCurrentItem", getCurrentItem);
+
+// itunesRouetr.post("/postFavoriteItems", postFavoriteItems);
+
+itunesRouetr.get("/getFavoriteItem", getFavoriteItem);
 
 module.exports = itunesRouetr;

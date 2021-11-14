@@ -2,11 +2,17 @@ const fs = require("fs");
 const axios = require("axios");
 
 let usersInfo = [];
+let current ={};
 
+//read user info 
 fs.readFile("./db/users.json", (err, data) => {
   usersInfo = JSON.parse(data.toString());
 });
-
+//read item info
+fs.readFile("./db/current.json", (err, data) => {
+  current = JSON.parse(data.toString());
+});
+//write on user info file
 const accessFile = (content) => {
   fs.writeFile("./db/users.json", JSON.stringify(content), (err, data) => {
     console.log(err);
@@ -88,6 +94,32 @@ const fav = (req, res) => {
   });
 };
 
+// const postFavoriteItems =(req,res)=>{
+//   const {result} = req.body;
+//   fs.writeFile("./db/current.json", JSON.stringify(result), (err, data) => {
+//     if(err)
+//     res.status(404).json("bad requst");
+//     else res.status(200).json(result);
+//   });
+// }
+
+const getItemDetails =(req,res)=>{
+  const {result} = req.body;
+  fs.writeFile("./db/current.json", JSON.stringify(result), (err, data) => {
+    if(err)
+    res.status(404).json("bad requst");
+    else res.status(200).json(result);
+  });
+}
+
+const getFavoriteItem = (req,res) =>{
+  res.status(200).json(current);
+}
+
+const getCurrentItem = (req,res) =>{
+  res.status(200).json(current);
+}
+
 module.exports = {
   getAllMovies,
   getAllMusic,
@@ -97,4 +129,8 @@ module.exports = {
   getAllAudiobook,
   getAllSoftware,
   fav,
+  getItemDetails,
+  getCurrentItem,
+  getFavoriteItem,
 };
+ 
