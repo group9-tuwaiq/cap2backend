@@ -15,8 +15,9 @@ const accessFile = (content) => {
 };
 
 const getAllMovies = (req, res) => {
+ // const media=req.body.media;
   axios
-    .get("https://itunes.apple.com/search?term=all&media=movie")
+    .get(`https://itunes.apple.com/search?term=all&media=movie`)
     .then((response) => {
       res.status(200).json(response.data);
     });
@@ -108,11 +109,6 @@ const search=(req,res)=>{
 module.exports = {
   getAllMovies,
   getAllMusic,
-  getAllPodcast,
-  getAllTvshow,
-  getAllEbook,
-  getAllAudiobook,
-  getAllSoftware,
   fav,
   search
 };
